@@ -15,8 +15,9 @@ WriteMakefile(
    VERSION_FROM => 'lib/POE/Loop/Gtk2.pm',
    NAME => 'POE::Loop::Gtk2',
    PREREQ_PM => {
-      'POE' => '0.23',
+      'POE' => '0.30',
       'Gtk2' => '0',
+      'POE::Loop::Glib' => '0.00022',
    },
    dist => {
       COMPRESS     =>'gzip',
