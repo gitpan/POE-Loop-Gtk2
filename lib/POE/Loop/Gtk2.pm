@@ -1,4 +1,4 @@
-# $Id$
+# $Id: Gtk2.pm 9 2004-06-25 14:43:03Z martijn $
 
 # Gtk2-Perl event loop bridge for POE::Kernel.
 
@@ -11,8 +11,7 @@ use strict;
 use POE::Loop::PerlSignals;
 
 use vars qw($VERSION);
-#$VERSION = do {my@r=(q$Rev$=~/\d+/g);sprintf"%d."."%04d"x$#r,@r};
-$VERSION = do {my@r=(qw(0 1));sprintf"%d."."%04d"x$#r,@r};
+$VERSION = do {my@r=(0,q$Rev: 9 $=~/\d+/g);sprintf"%d."."%04d"x$#r,@r};
 
 # Everything plugs into POE::Kernel.
 package POE::Kernel;
@@ -120,11 +119,11 @@ sub loop_watch_filehandle {
   $fileno_watcher[$fileno]->[$mode] =
     Glib::IO->add_watch( $fileno,
                          ( ($mode == MODE_RD)
-                           ? ( 'G_IO_IN',
+                           ? ( ['G_IO_IN', 'G_IO_HUP', 'G_IO_ERR'],
                                \&_loop_select_read_callback
                              )
                            : ( ($mode == MODE_WR)
-                               ? ( 'G_IO_OUT',
+                               ? ( ['G_IO_OUT', 'G_IO_ERR'],
                                    \&_loop_select_write_callback
                                  )
                                : ( 'G_IO_HUP',
@@ -176,11 +175,11 @@ sub loop_resume_filehandle {
   $fileno_watcher[$fileno]->[$mode] =
     Glib::IO->add_watch( $fileno,
                          ( ($mode == MODE_RD)
-                           ? ( 'G_IO_IN',
+                           ? ( ['G_IO_IN', 'G_IO_HUP', 'G_IO_ERR'],
                                \&_loop_select_read_callback
                              )
                            : ( ($mode == MODE_WR)
-                               ? ( 'G_IO_OUT',
+                               ? ( ['G_IO_OUT', 'G_IO_ERR'],
                                    \&_loop_select_write_callback
                                  )
                                : ( 'G_IO_HUP',
