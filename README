@@ -1,0 +1,8 @@
+POE::Loop::Gtk2
+
+This is POE::Loop::Gtk2, a module to integrate the Gtk2 mainloop
+with POE. It is released seperately from POE proper because Gtk2
+apparently needs a perl with threads enabled.
+
+
+-- martijn

@@ -1,0 +1,5 @@
+POE::Loop::Gtk2 is based on POE::Loop::Gtk, which
+was written by Rocco Caputo.
+
+Martijn van Beers  <martijn@cpan.org> tries to maintain it until
+it can go into POE proper
